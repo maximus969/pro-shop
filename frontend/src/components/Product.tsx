@@ -30,7 +30,7 @@ export const Product = ({ product }: { product: ProductPropsType }) => {
   );
 };
 
-type ProductPropsType = {
+export type ProductPropsType = {
   _id: string,
   name: string,
   image: string,

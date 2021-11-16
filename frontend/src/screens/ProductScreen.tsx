@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import products from "../products";
 import { Rating } from "../components/Rating";
+import axios from "axios";
 
 export const ProductScreen = ({ match }: { match: any }) => {
+  const [product, setProduct] = useState({
+    _id: '1',
+    name: 'Airpods Wireless Bluetooth Headphones',
+    image: '/images/airpods.jpg',
+    description:
+      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 89.99,
+    countInStock: 10,
+    rating: 4.5,
+    numReviews: 12,
+  })
 
-  const product = products.find((p) => p._id === match.params.id)
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`)
+
+      setProduct(data)
+    }
+
+    fetchProduct()
+  }, [])
 
   if (!product) {
     return <h3>there is no such product</h3>
