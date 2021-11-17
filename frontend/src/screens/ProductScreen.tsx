@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
-import products from "../products";
 import { Rating } from "../components/Rating";
 import axios from "axios";
 
@@ -28,7 +27,7 @@ export const ProductScreen = ({ match }: { match: any }) => {
     }
 
     fetchProduct()
-  }, [])
+  }, [match])
 
   if (!product) {
     return <h3>there is no such product</h3>
